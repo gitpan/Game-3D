@@ -17,6 +17,7 @@ can_ok ('Game::3D::Thingy', qw/
   new _init activate deactivate is_active id name
   state output signal add_input add_output link
   insert remove container _update_space
+  load
   /);
 
 use Game::3D::Signal qw/SIGNAL_ON SIGNAL_OFF STATE_OFF STATE_ON STATE_FLIP/;

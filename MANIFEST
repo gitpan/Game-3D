@@ -16,6 +16,7 @@ lib/Game/3D/Signal.pm		# signal and state names
 lib/Game/3D/Thingy.pm		# base class, providing id(), name() etc
 lib/Game/3D/Link.pm		# link thingies together
 lib/Game/3D/Marker.pm		# marks a point
+lib/Game/3D/Trigger.pm		# a trigger
 t/point.t
 t/area.t
 t/physical.t
@@ -24,3 +25,7 @@ t/thingy.t
 t/signal.t
 t/marker.t
 t/living.t
+t/trigger.t
+example/game.pl			# sample game using the object hirarchy in:
+example/classes.txt		# this file is the object hirarchy
+example/level00.txt		# this is the first level using classes.txt

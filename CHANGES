@@ -24,6 +24,16 @@ Game:3D:
  fixed:
   * Game::3D::Point::center() renamed to pos()
 
+2003-03-08 v0.03 Tels - 180 tests
+ added:
+  * Thingy: load() and _construct(), load hirarchy and objects from text file
+  * example text-adventure game in ./examples showing class-hirarchy and level
+    loading code
+  * forgot to include trigger tests
+ Caveat: Some classes like Trigger, Living, Marker, Physical etc might be gone
+         from the next version, since they can be replaced by text-definitions
+         in the object hirarchy, completely!
+
 Please send me test-reports, your experiences with this and your ideas - I love
 to hear about my work!
 

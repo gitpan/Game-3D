@@ -15,7 +15,7 @@ use vars qw/@ISA $VERSION $AUTOLOAD/;
 use Game::3D::Signal
   qw/STATE_OFF SIGNAL_FLIP SIGNAL_ACTIVATE SIGNAL_DEACTIVATE/;
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 ##############################################################################
 # protected vars
@@ -33,7 +33,7 @@ sub new
   # create a new instance of a thingy
   my $class = shift;
 
-  my $self = Games::Object->new( -id => ID(), @_);
+  my $self = Games::Object->new( -id => ID() );
   bless $self, $class;
 
   $self->{active} = 1;
@@ -314,6 +314,144 @@ sub link
   $link;
   }
 
+##############################################################################
+# load a class(es) and/or object(s) from a file
+
+# eventuall the code below can be handled by Games::Object
+
+sub DEBUG () { 0 };
+
+sub load
+  {
+  my ($self,$baseclass,$file,$level) = @_;
+
+  $file ||= '';
+  my $line_nr = 0; my $hash = {};
+  my $state = 0; my @ret = ();
+  open my $FILE, $file or die ("Cannot read file '$file': $!");
+  my $target;
+  while (my $line = <$FILE>)
+    {
+    $line_nr++;
+    next if $line =~ /^#/;	# comment
+    next if $line =~ /^\s*$/;	# empty line
+    chomp($line);
+
+    if ($line =~ /^\s*[\}\]]/)
+      {
+      # closing block sign
+      die ("Unexpected '}' at file $file, line $line_nr") if $state == 0;
+      $state--;
+      push @ret, $self->_construct($baseclass,$hash) if $state == 0;
+      $target = undef;
+      print "$line\n" if DEBUG;
+      }
+    elsif ($line =~ /^\s*([\w:]+)\s*\{\s*$/)
+      {
+      die ("Error, missing '}' in $file, line $line_nr") if $state != 0;
+      # starting block
+      print "Starting definition for '$1'\n" if DEBUG;
+      $hash = { class => $1 }; $state = 1;
+      }
+    elsif ($line =~ /^\s*([\w]+)\s+=>\s+(.*?)\s*$/)
+      {
+      die ("Error, missing 'Class::Name {' in $file, line $line_nr")
+       if $state == 0;
+      my $res = $2;
+      print " " x $state, "$1 => '$res'\n" if DEBUG;
+      if ($res =~ /^\{|\[$/)
+        {
+        # new block
+        die ("Too deeply nested in file $file, line $line_nr") if $state == 2;
+        $state = 2; $target = $1;
+        }
+      else
+        {
+        $res = eval("$res");
+        my $t = $hash;
+        if (exists $t->{$1})
+          {
+          $t->{$1} = [ $t->{$1} ] unless ref($t->{$1}) eq 'ARRAY';
+          push @{$t->{$1}}, $res;
+          }
+        else
+          {
+          $t->{$1} = $res; 
+          }
+        }
+      }
+    elsif ($line =~ /^\s+(\[.*?\])\s*,\s*$/)
+      {
+      die ("Wrong nesting in file $file, line $line_nr") if $state != 2;
+      print "$line\n" if DEBUG;
+      my $res = eval("$1");
+      my $t = $target;
+      if (exists $t->{$1})
+        {
+        $t->{$1} = [ $t->{$1} ] unless ref($t->{$1}) eq 'ARRAY';
+        push @{$t->{$1}}, $res;
+        }
+      else
+        {
+        $t->{$1} = $res; 
+        }
+      }
+   else
+      {   
+      print "Ignoring $line\n" if DEBUG;
+      }
+    }
+  die ("Error, missing '}' in $file, line $line_nr") if $state != 0;
+  close $FILE;
+  \@ret;
+  }
+
+sub _construct
+  {
+  my ($self,$baseclass,$hash) = @_;
+
+  my $type = 'CLASS'; $type = 'OBJECT' if exists $hash->{id};
+  print "constructing $type $baseclass"."::$hash->{class}\n" if DEBUG;
+
+  my $object = $hash->{class};
+
+  my $class = $baseclass . '::' . $hash->{class};
+  if ($type eq 'CLASS')
+    {
+    my $def = <<CLASS
+
+	package $class;
+	use strict;
+	use vars qw/\@ISA/;
+	\@ISA = qw/$baseclass/;
+
+	sub _init
+	  {
+	  my \$self = shift;
+
+	  my \$args = \$_[0];
+	  \$args = { \@_ } unless ref \$args eq 'HASH';
+
+	  \$self\->SUPER::_init(\@_);
+
+	  \$self;
+	  }
+
+CLASS
+    ;
+    print "Using '$def'\n" if DEBUG;
+    eval ($def);
+    } 
+  else
+    {
+    print "new\n" if DEBUG;
+    $object = $class->new( $hash );
+    print "result $object\n" if DEBUG;
+    }
+  print "Done\n" if DEBUG;
+  $object;
+  }
+
 1;
 
 __END__
@@ -537,6 +675,36 @@ Sends the signal C<$signal> to all the outputs that were registered with that
 thingy and tells the receiver that the signal came from C<$source>. Example:
 
 	$thingy->output($thingy->{id}, SIGNAL_ON);
+
+=item load()
+
+	$thingy->load($baseclass,$file,$difficulty_level);
+
+This loads a file and reads the class and object definitions in this file.
+The classes and objects are then constructed as subcalsses of $baseclass
+as they are read in. This basically pullsin the entire object hirarchy plus
+all the objects, although it make sense to keep them in two seperate files
+and load first the hirarchy, then the objects:
+
+	$thingy->load('Game::3D::Object','hirarchy.txt');
+	$world = $thingy->load('Game::3D::Object','world.txt');
+	$level = $thingy->load('Game::3D::Object','level00.txt',1);
+
+The first line loads the hirachy (this doesn't contain any objects, so we
+discard the return value, although it might be safer to check for stray
+objects), then loads all the basic world objects (like: player, camera,
+quests etc and constructs them), and then it loads level 0, and constructs
+all the objects from there. The difficulty level is set to 1, meaning any
+object that is defined not to appear in level 1 (like: 1 means C<Easy>, and
+a certain blocking door is not there in C<Easy>, but only in C<Hard> and
+C<Expert>) will not be constructed in the first place. This is faster than
+constructing them, and then throwing them away.
+
+=item _construct()
+
+	$thingy->_construct($baseclass,$hash);
+
+This is called by L<load()> for each object or class to be constructed.
 
 =back
 
