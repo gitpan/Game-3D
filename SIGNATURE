@@ -1,0 +1,52 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.21.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It would check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+
+SHA1 f3034664c4f4c399801309b6603a0841e6cdb23d BUGS
+SHA1 6b179530d26cc948a8e8d6b85044797970dcd2b0 CHANGES
+SHA1 3a93c8b7be73dcb5388a0a891e912e1eed36acb5 CREDITS
+SHA1 d6a6c30ee6d9ba6b9afab8bbf6a25e1b23c744e0 LICENSE
+SHA1 632104dbc89ae86a948fcd9b5647e09cd2ef0061 MANIFEST
+SHA1 1c2c217d54b7c62441e3b1bef954f968f25d2b9e Makefile.PL
+SHA1 ec318c81989bf2715553ffdb09102a8e6e659e48 README
+SHA1 ddf98c8d7a783b5c7560ef89cd5f718b4a54dc3a TODO
+SHA1 95faec0dc3b7276ae39e5b1c389bb88b623ace03 lib/Game/3D.pm
+SHA1 8468e49df07ac3c432069e6138ccc2c182020ef0 lib/Game/3D/Area.pm
+SHA1 332200215941ce2f09f2266224fcf25d839620e5 lib/Game/3D/Link.pm
+SHA1 59f0559b2b9780402332e685990291ba340ba350 lib/Game/3D/Living.pm
+SHA1 7917a2fb81f852c012d94e16b184ba9f27483c5f lib/Game/3D/Marker.pm
+SHA1 a3b46647bbb305837a35d8d38ebd965086bea36d lib/Game/3D/Physical.pm
+SHA1 a7dd5eb4b48571aadb39cc087fa1ed64e2b1a22b lib/Game/3D/Point.pm
+SHA1 3a16b3c053b1df663ff58fb36fd62ca0bbd00da1 lib/Game/3D/Signal.pm
+SHA1 d7eb6b8fb4f9e14b52c30f9f052ae3f3a6df101d lib/Game/3D/Thingy.pm
+SHA1 1eaf1169cf0f225d22305620cd84262021284334 t/area.t
+SHA1 7f2fb5953349f0222e964c65a84cdb541aaa2239 t/link.t
+SHA1 1d9e25b8ee8b50f02a70b3ba7ab507702cf650d5 t/living.t
+SHA1 4ab37d6925e1b38548c8257b52fe2fd45814f94b t/marker.t
+SHA1 a645e61194c07cbc0edd74dc8c664d2ae457d531 t/physical.t
+SHA1 03ae190744a4dda6a6700e810deed5609a8501ee t/point.t
+SHA1 42c81590947063202ca63c3e14b7f12cb648292a t/signal.t
+SHA1 b217ae20368b77c5cb2f54a09d127430ea3f06e0 t/thingy.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.0.6 (GNU/Linux)
+Comment: When cryptography is outlawed, bayl bhgynjf jvyy unir cevinpl.
+
+iQEVAwUBPmPbc3cLPEOTuEwVAQFiuAf8CNw+NOqBdnqLkiUdG6c6+y16l56fIEmk
+5whchmVZ7R69YX285oxxpDLxukc3WAR9Pfjm2XoSKvzPTrSm51PA9gw/i5wfD7OI
+shLioTUAK1XJXUVf/YIk8wTO+Niej2Ek5+illCm8sWLNrcHF+4HuN7o2IED9YX3a
+MAFf/rgUaOegDJ+VmkIrRmt7yqyjpQxGfncdcvw1hNvFdugrptDf1yZhKQSCP2kk
+/Xlq/tEO9jzzyLoxj7MGpIf/jnNtPMkmxuiqTRBaidpJaSgv48NDqGAQA41SP3Z4
+rb40y1pOR9IXN6F7eEw62gY3yun7H4oXYXPYCGEbBoRsjEsU9mUdaA==
+=rZT/
+-----END PGP SIGNATURE-----

@@ -1,0 +1,26 @@
+BUGS
+CHANGES
+CREDITS
+MANIFEST
+README
+SIGNATURE
+LICENSE
+TODO
+Makefile.PL
+lib/Game/3D.pm			# doc and VERSION
+lib/Game/3D/Point.pm		# a point in 3D space
+lib/Game/3D/Area.pm		# an area (with center and size) in 3D space
+lib/Game/3D/Physical.pm		# a physical object
+lib/Game/3D/Living.pm		# a living object
+lib/Game/3D/Signal.pm		# signal and state names
+lib/Game/3D/Thingy.pm		# base class, providing id(), name() etc
+lib/Game/3D/Link.pm		# link thingies together
+lib/Game/3D/Marker.pm		# marks a point
+t/point.t
+t/area.t
+t/physical.t
+t/link.t
+t/thingy.t
+t/signal.t
+t/marker.t
+t/living.t
