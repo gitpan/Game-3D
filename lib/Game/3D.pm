@@ -9,7 +9,7 @@ use strict;
 
 use vars qw/$VERSION/;
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 1;
 
@@ -19,7 +19,7 @@ __END__
 
 =head1 NAME
 
-Game::3D - a package containing 3D points, areas, objects and links
+Game::3D - a package containing 3D points, vectors, areas, objects and links
 
 =head1 SYNOPSIS
 
@@ -31,12 +31,13 @@ Game::3D - a package containing 3D points, areas, objects and links
 
 =head1 EXPORTS
 
-Exports nothing on default.
+Exports nothing.
 
 =head1 DESCRIPTION
 
 This package is just the basis documentation for all the classes contained
-under Game::3D.
+under Game::3D. It does not need to be used, unless you want to require a
+specific version of this package.
 
 =head1 METHODS
 
@@ -54,7 +55,8 @@ None known yet.
 
 L<SDL:App::FPS>, L<SDL::App> and L<SDL>.
 
-L<GAME::3D::Point>.
+L<GAME::3D::Point>.  L<GAME::3D::Area>.  L<GAME::3D::Vector>.
+L<GAME::3D::Brush>.  L<GAME::3D::Level>.  L<GAME::3D::Link>.
 
 =cut
 

@@ -3,10 +3,8 @@
 Game::3D:
 
 * add:
- + Game::3D::Living (Game::3D::Object::Physical::Living)
  + Game::3D::NPC (Game::3D::Object::Physical::Living::NPC)
  + Game::3D::Player (Game::3D::Object::Physical::Living::Player)
- + Game::3D::Camera (Game::3D::Object::Camera)
  + Game::3D::Light (Game::3D::Object::Light)
  + Game::3D::Button (Game::3D::Object::Physical::Button)
  + Game::3D::Switch (Game::3D::Object::Physical::Switch)

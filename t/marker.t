@@ -14,7 +14,7 @@ BEGIN
   }
 
 can_ok ('Game::3D::Marker', qw/ 
-  new _init x y z center
+  new _init x y z pos
   /);
   
 
@@ -26,7 +26,7 @@ is ($obj->id(), 1, 'id is 1');
 is ($obj->x(), 0, 'X is 0');
 is ($obj->y(), 0, 'Y is 0');
 is ($obj->z(), 0, 'Z is 0');
-is (join(",",$obj->center()), '0,0,0', 'center is 0,0,0');
+is (join(",",$obj->pos()), '0,0,0', 'center is 0,0,0');
 
 is ($obj->x(12), 12, 'X is 12');
 is ($obj->x(), 12, 'X is 12');

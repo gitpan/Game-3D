@@ -14,7 +14,7 @@ BEGIN
   }
 
 can_ok ('Game::3D::Physical', qw/ 
-  new _init x y z center
+  new _init x y z pos
   size width height length shape
   /);
   
@@ -26,7 +26,7 @@ is (ref($obj), 'Game::3D::Physical', 'new worked');
 is ($obj->x(), 0, 'X is 0');
 is ($obj->y(), 0, 'Y is 0');
 is ($obj->z(), 0, 'Z is 0');
-is (join(",",$obj->center()), '0,0,0', 'center is 0,0,0');
+is (join(",",$obj->pos()), '0,0,0', 'center is 0,0,0');
 
 use Game::3D::Area qw/GAME_3D_CUBE/;
 

@@ -24,6 +24,11 @@ All other objects are based on on of Point and Area, as well as Thingy.
 There exist both virtual objects (like Marker and SoundSources, Camera) as
 well es physical objects like NPCs, the Player, Button, Switch, Lever etc.
 
+For some background information, as well reasoning why this was developed and
+why in this way, browse to:
+
+	http://bloodgate.com/perl/sdl/game.html
+
 Installation
 ============
 

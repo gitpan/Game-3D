@@ -64,7 +64,7 @@ sub z
   $self->{z};
   }
 
-sub center
+sub pos
   {
   # return X,Y,Z
   my $self = shift;
@@ -138,11 +138,11 @@ Set and return or just return the point's Y coordinate.
 	
 Set and return or just return the point's Z coordinate.
 
-=item center()
+=item pos()
 
 	print join (" ", $point->center());
-	$point->center(123,456,-1);		# set X,Y and Z
-	$point->center(undef,undef,1);		# set only Z
+	$point->pos(123,456,-1);		# set X,Y and Z
+	$point->pos(undef,undef,1);		# set only Z
 	
 Set and return or just return the point's coordinates.
 

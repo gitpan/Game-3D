@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-use Test::More tests => 24;
+use Test::More tests => 25;
 use strict;
 
 BEGIN
@@ -14,7 +14,7 @@ BEGIN
   }
 
 can_ok ('Game::3D::Area', qw/ 
-  new _init x y z center
+  new _init x y z pos rotation
   size width height length shape
   /);
 
@@ -25,7 +25,8 @@ is (ref($area), 'Game::3D::Area', 'new worked');
 is ($area->x(), 0, 'X is 0');
 is ($area->y(), 0, 'Y is 0');
 is ($area->z(), 0, 'Z is 0');
-is (join(",",$area->center()), '0,0,0', 'center is 0,0,0');
+is (join(",",$area->pos()), '0,0,0', 'pos is 0,0,0');
+is (join(",",$area->rotation()), '0,0,0', 'rot is 0,0,0');
 is ($area->shape(), GAME_3D_CUBE, 'shaped like a cube');
 
 is ($area->x(12), 12, 'X is 12');
